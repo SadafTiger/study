@@ -1,103 +1,130 @@
 import streamlit as st
 import google.generative_ai as genai
-import json
 import pandas as pd
+import gspread
+from oauth2client.service_account import ServiceAccountCredentials
+import json
 
-# --- ১. মেমোরি সেটআপ (Database) ---
-# এটি তোমার সেশনের সব প্রশ্ন এবং রেজাল্ট মনে রাখবে
-if 'memory' not in st.session_state:
-    st.session_state['memory'] = []
-if 'current_quiz' not in st.session_state:
-    st.session_state['current_quiz'] = None
+# --- SETUP: Google Sheet & AI ---
+def connect_to_sheet():
+    # Streamlit Secrets theke login info nibe
+    scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
+    creds_dict = dict(st.secrets["gcp_service_account"])
+    creds = ServiceAccountCredentials.from_json_keyfile_dict(creds_dict, scope)
+    client = gspread.authorize(creds)
+    
+    # Tomar Sheet ID (Change korar dorkar nai jodi ager sheet use koro)
+    SHEET_ID = "1ZqD3LOchLCL1Wt11qX7LznfIsFFqWNvgTkw-nbzTePg"
+    return client.open_by_key(SHEET_ID).sheet1
 
-# --- ২. AI কনফিগারেশন ---
-API_KEY = "AIzaSyDrdvs7jhqVtR5ucFC3D2EPUe0wppCSw2k"
-genai.configure(api_key=API_KEY)
-model = genai.GenerativeModel('gemini-1.5-pro') # প্রো মডেল ব্যবহার হচ্ছে
+# AI API Key Setup
+genai.configure(api_key=st.secrets["general"]["GEMINI_API_KEY"])
+model = genai.GenerativeModel('gemini-1.5-pro')
 
-st.set_page_config(page_title="HSC AI Steroids", layout="wide", initial_sidebar_state="expanded")
+st.set_page_config(page_title="HSC AI Tutor", layout="wide")
 
-# --- ৩. কাস্টম ডিজাইন (Dark Mode & Mobile Friendly) ---
-st.markdown("""
-<style>
-    .stApp { background-color: #0e1117; color: white; }
-    .q-card { background-color: #1d2129; padding: 20px; border-radius: 12px; border-left: 6px solid #4CAF50; margin-bottom: 20px; }
-    .stButton>button { width: 100%; border-radius: 10px; height: 3.5em; background: linear-gradient(45deg, #2e7d32, #1b5e20); color: white; border: none; }
-</style>
-""", unsafe_allow_html=True)
+# --- UI Design ---
+st.title("🧠 HSC AI Tutor (Final Pro Ver.)")
+st.markdown("---")
 
-# --- ৪. সাইডবার (প্রগ্রেস ট্র্যাকার) ---
+# --- SIDEBAR: Database & Memory ---
 with st.sidebar:
-    st.title("📊 My Learning Lab")
-    if st.session_state['memory']:
-        st.subheader("Proficiency Analysis")
-        # AI এখানে তোমার পাস্ট ডাটা এনালাইসিস করবে
-        history = str(st.session_state['memory'][-5:]) # লাস্ট ৫টি কুইজ
-        analysis_prompt = f"Student Performance Data: {history}. Briefly analyze weak and strong areas in Bangla."
-        try:
-            analysis = model.generate_content(analysis_prompt)
-            st.info(analysis.text)
-        except:
-            st.write("Keep practicing to see analysis!")
-    else:
-        st.write("কোনো কুইজ দিলে এখানে তোমার দক্ষতা দেখাবে।")
+    st.header("📂 Memory Status")
+    try:
+        sheet = connect_to_sheet()
+        data = sheet.get_all_records()
+        df = pd.DataFrame(data)
+        st.success(f"✅ Database Connected! Total Qs: {len(df)}")
+        
+        # Weakness Tracker
+        if not df.empty:
+            mistakes = df[df['Status'] == 'Wrong']
+            if not mistakes.empty:
+                st.error(f"⚠️ Focus on: {len(mistakes)} mistakes found.")
+    except Exception as e:
+        st.error("❌ Connection Failed! Check Step 4.")
+        st.write(e)
+        df = pd.DataFrame()
 
-# --- ৫. মেইন কুইজ ইঞ্জিন ---
-st.title("🧠 HSC AI Tutor (Steroids Mode)")
-
+# --- MAIN APP: Exam Generator ---
 col1, col2 = st.columns(2)
-with col1:
-    subject = st.selectbox("বিষয় বেছে নাও", ["Physics", "Chemistry", "Math", "Biology", "ICT"])
-with col2:
-    topic = st.text_input("অধ্যায় বা টপিক", placeholder="যেমন: জৈব রসায়ন")
+subject = col1.selectbox("Subject", ["Physics", "Chemistry", "Math", "Biology", "ICT"])
+topic = col2.text_input("Topic Name", placeholder="Example: Vector")
 
-if st.button("🔥 জেনারেট কাস্টম কুইজ"):
-    # AI এখানে প্রম্পট ইঞ্জিনিয়ারিং এর মাধ্যমে তোমার লেভেল বুঝে প্রশ্ন করবে
+if st.button("🔥 Create Exam"):
+    # AI Memory Check
+    memory_context = ""
+    if not df.empty and topic:
+        # Filter mistakes for this specific topic
+        topic_mistakes = df[
+            (df['Topic'].astype(str).str.contains(topic, case=False)) & 
+            (df['Status'] == 'Wrong')
+        ]
+        if not topic_mistakes.empty:
+            bad_questions = topic_mistakes['Question'].tolist()[-3:] # Last 3 mistakes
+            memory_context = f"Student previously failed these: {bad_questions}. Make similar tricky questions."
+
     prompt = f"""
-    Act as a highly experienced HSC Examiner. 
-    Topic: {subject} - {topic}.
-    Task: Create 10 logical and conceptual MCQs. 
-    Memory: The student has done these topics before: {st.session_state['memory']}. 
-    Focus: Focus more on conceptual clarity and common mistakes.
-    Format: JSON array only. 
-    Structure: [{"question": "...", "options": ["A", "B", "C", "D"], "answer_index": 0, "explanation": "Detailed Bangla explanation"}]
+    Act as HSC Teacher. Subject: {subject}, Topic: {topic}.
+    Memory Context: {memory_context}
+    Task: Create 5 MCQ Questions.
+    Format: JSON Array ONLY. 
+    Structure: [{{"q": "Question", "o": ["A", "B", "C", "D"], "a": 0, "e": "Explanation (Bangla)"}}]
     """
     
-    with st.spinner("AI তোমার মেমোরি স্ক্যান করে প্রশ্ন বানাচ্ছে..."):
-        response = model.generate_content(prompt)
-        # JSON ক্লিন করা
-        clean_text = response.text.replace('```json', '').replace('```', '').strip()
-        st.session_state['current_quiz'] = json.loads(clean_text)
-        st.session_state['submitted'] = False
+    with st.spinner("AI is thinking..."):
+        try:
+            res = model.generate_content(prompt)
+            clean_json = res.text.replace('```json', '').replace('```', '').strip()
+            st.session_state['quiz'] = json.loads(clean_json)
+            st.session_state['submitted'] = False
+        except:
+            st.error("AI Error. Try again.")
 
-# --- ৬. প্রশ্ন প্রদর্শন ও সেভ লজিক ---
-if st.session_state['current_quiz']:
-    quiz = st.session_state['current_quiz']
+# --- QUIZ DISPLAY ---
+if 'quiz' in st.session_state:
     with st.form("exam_form"):
-        user_answers = []
-        for i, q in enumerate(quiz):
-            st.markdown(f"<div class='q-card'><b>{i+1}. {q['question']}</b></div>", unsafe_allow_html=True)
-            ans = st.radio(f"অপশনসমূহ {i}", q['options'], key=f"ans_{i}", label_visibility="collapsed")
-            user_answers.append(ans)
+        user_picks = {}
+        for i, item in enumerate(st.session_state['quiz']):
+            st.write(f"**Q{i+1}: {item['q']}**")
+            user_picks[i] = st.radio("Select:", item['o'], key=f"q{i}", label_visibility="collapsed")
+            st.divider()
         
-        if st.form_submit_button("খাতা জমা দাও (Submit)"):
+        # Submit Logic
+        if st.form_submit_button("Submit & Save"):
             score = 0
-            details = []
-            for i, q in enumerate(quiz):
-                correct_ans = q['options'][q['answer_index']]
-                is_correct = user_answers[i] == correct_ans
-                if is_correct: score += 1
-                details.append({"topic": topic, "question": q['question'], "status": "Correct" if is_correct else "Wrong"})
+            rows_to_add = []
             
-            # মেমোরিতে সেভ করা (Steroids Power)
-            st.session_state['memory'].append({"topic": topic, "score": score, "details": details})
+            for i, item in enumerate(st.session_state['quiz']):
+                correct = item['o'][item['a']]
+                status = "Correct" if user_picks[i] == correct else "Wrong"
+                if status == "Correct": score += 1
+                
+                # Sheet e ja jabe
+                rows_to_add.append([subject, topic, item['q'], status, item['e']])
+            
+            # Save to Google Sheet
+            try:
+                sheet.append_rows(rows_to_add)
+                st.toast("✅ Saved to Google Sheet!")
+            except:
+                st.error("Save failed. Check permissions.")
+                
+            st.session_state['score'] = score
             st.session_state['submitted'] = True
-            st.balloons()
-            st.success(f"তোমার স্কোর: {score} / 10")
+            st.rerun()
 
-    if st.session_state.get('submitted'):
-        st.subheader("💡 ব্যাখ্যা ও সমাধান")
-        for i, q in enumerate(quiz):
-            with st.expander(f"প্রশ্ন {i+1} এর ব্যাখ্যা"):
-                st.write(f"সঠিক উত্তর: **{q['options'][q['answer_index']]}**")
-                st.info(f"ব্যাখ্যা: {q['explanation']}")
+# --- RESULT & ANKI ---
+if st.session_state.get('submitted'):
+    st.balloons()
+    st.header(f"Score: {st.session_state['score']} / 5")
+    
+    st.subheader("📋 Copy for Anki")
+    st.code("\n".join([
+        f"{q['q']} <br> {q['o']} ; ✅ {q['o'][q['a']]} <br> 💡 {q['e']}" 
+        for q in st.session_state['quiz']
+    ]))
+    
+    with st.expander("Show Explanations"):
+        for q in st.session_state['quiz']:
+            st.info(f"{q['q']} \n\n ✅ Answer: {q['o'][q['a']]} \n\n 💡 {q['e']}")
