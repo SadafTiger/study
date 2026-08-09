@@ -2,9 +2,9 @@
 
 ## WHY THIS STORY MATTERS
 
-In July 2026, Chattogram experienced one of the region's most severe floods in 42 years. Torrential rain triggered flash floods and landslides across southeastern Bangladesh, claiming at least 51 lives and forcing more than one million people from their homes. More than 38,000 people sought shelter in emergency camps. Chattogram city and its surrounding low-lying areas recorded 412.3 millimetres of rain within 24 hours, while financial losses were estimated at USD 17.3 million. Deeply moved by the suffering of affected communities, Navaan Foundation launched an initiative that stretched our resources and expectations: **Project Chattala: Beyond the Flood**.
+In July 2026, Chattogram experienced one of the region's most severe floods in the past 42 years. Torrential rain triggered flash floods and landslides across southeastern Bangladesh, claiming at least 51 lives and forcing more than one million people from their homes. More than 38,000 people sought shelter in emergency camps. Chattogram city and surrounding low-lying areas recorded 412.3 millimetres of rain within 24 hours, while financial losses were estimated at USD 17.3 million. Deeply moved by the suffering of affected communities, Navaan Foundation launched an initiative that stretched our resources and expectations: **Project Chattala: Beyond the Flood**.
 
-The project was carried out in Banshkhali, Chattogram, where we focused on 70 families living in remote, difficult-to-reach areas. Many had lost their homes, had little or no stable income and had received no previous assistance. Our relief packages went beyond dry food, providing essential food, basic medicines and hygiene supplies designed to support each household for up to 15 days. The project came together through determination and teamwork. From the founder and field marshals to ambassadors and content writers, every member played a part. This was never about titles or recognition; it was about responding with compassion when people needed us most. From planning and recruitment to fieldwork, we remained focused on helping families regain stability and dignity. Our work was not driven by pity, but by the belief that people who had lost everything deserved a fair chance to rebuild their lives.
+The project was carried out in Banshkhali, Chattogram, where we focused on 70 families living in remote, difficult-to-reach areas. Many had lost their homes, had little or no stable income and had received no previous assistance. Our relief packages went beyond dry food, combining staple foods, basic medical items and hygiene essentials designed to support each household for up to 15 days. The project came together through determination and teamwork. From the founder and field marshals to ambassadors and content writers, every member played a part. This was never about titles or recognition; it was about responding with compassion when people needed us most. From planning and recruitment to fieldwork, we remained focused on helping families regain stability and dignity. Our work was not driven by pity, but by the belief that people who had lost everything deserved a fair chance to rebuild their lives.
 
 ## The Situation: Why the Project Was Needed
 
@@ -12,7 +12,7 @@ When devastating floods swept through different parts of Bangladesh, countless f
 
 At Navaan Foundation, we believe meaningful support must extend beyond the headlines. Instead of responding only at the peak of the crisis, we launched **Project Chattala: Beyond the Flood** as a post-flood relief initiative to stand beside communities that still needed help but were receiving far less attention.
 
-Supported by a growing community of young people, we turned collective compassion into practical action. The trust and generosity of our supporters helped us mobilise resources and provide essential assistance.
+Supported by a growing community of young people, we turned compassion into practical action. Contributions from individuals and organisations helped us mobilise resources and provide essential assistance.
 
 The project was founded on a simple belief: humanitarian support should not end when public attention fades. True solidarity means remaining present even after the spotlight has moved on.
 
@@ -44,7 +44,7 @@ With the trust and generosity of our supporters, Navaan Foundation raised BDT 70
 
 The project provided carefully prepared relief packages to 70 flood-affected families. A needs-based selection process ensured that assistance reached households facing the greatest challenges during recovery.
 
-### 280+ Individuals Reached
+### Approximately 280 Individuals Reached
 
 Based on an average household size of four, the initiative directly supported around 280 people and helped ease the pressures of daily life after the flood.
 
@@ -74,7 +74,7 @@ All 70 selected families received the same relief package, ensuring a fair and t
 
 **Transportation costs:** BDT 4,970
 
-**Package contents:** Essential food, basic medicines and hygiene supplies selected to support families during post-flood recovery.
+**Package contents:** Food staples, basic medicines and personal hygiene items selected to support families during post-flood recovery.
 
 | Category | Item | Quantity per family |
 | --- | --- | --- |
@@ -101,7 +101,7 @@ Many homes were located deep within villages where muddy roads made vehicle acce
 
 ## 13. Challenges & Lessons Learned
 
-The mission presented several challenges. Our volunteers travelled overnight from Dhaka to Chattogram with little sleep before beginning a demanding day of fieldwork. Reaching remote villages required long walks along muddy and unsafe paths while carrying heavy relief packages. Beneficiary verification also required considerable time and care, as each household had to be visited with guidance from local teachers and social workers. Extreme heat, limited drinking water and occasional pressure from people who did not meet the selection criteria added to the difficulty of the operation.
+The mission presented several challenges. Our volunteers travelled overnight from Dhaka to Chattogram with little sleep before beginning a demanding day of fieldwork. Reaching remote villages required long walks along muddy and unsafe paths while carrying heavy relief packages. Beneficiary verification also required considerable time and care, as each household had to be visited with guidance from trusted people in the community. Extreme heat, limited drinking water and occasional pressure from people who did not meet the selection criteria added to the difficulty of the operation.
 
 Seeing the damage firsthand gave us a clearer understanding of how deeply the flood had disrupted these communities. Families were struggling with damaged homes, lost livelihoods and broken infrastructure.
 
