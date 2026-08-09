@@ -4,7 +4,7 @@
 
 In July 2026, Chattogram experienced one of its most severe floods in the past 42 years. Torrential rain triggered flash floods and landslides across southeastern Bangladesh, claiming at least 51 lives and forcing more than one million people from their homes. More than 38,000 people sought shelter in emergency camps. Chattogram city and its surrounding low-lying areas recorded 412.3 millimetres of rain in 24 hours, while financial losses were estimated at USD 17.3 million.
 
-As the initial flow of emergency aid began to slow, Navaan Foundation launched **Project Chattala: Beyond the Flood** in Banshkhali, Chattogram. The project focused on 70 families in remote areas. Many had lost their homes, had little or no reliable income and had received no earlier assistance because their communities were difficult to reach. Each household received a relief package tailored to its immediate needs.
+As the initial flow of emergency aid began to slow, Navaan Foundation launched **Project Chattala: Beyond the Flood** in Banshkhali, Chattogram. The project focused on 70 families in remote areas. Many had lost their homes, had little or no reliable income and had received no earlier assistance because their communities were difficult to reach. Each household received a standardised relief package designed to address immediate needs.
 
 From fundraising and purchasing to packing and field distribution, members across Navaan Foundation shared responsibility for the project. The purpose was practical: to help families move through recovery with dignity.
 
@@ -60,7 +60,7 @@ Our volunteers then conducted door-to-door surveys, assessing each family's hous
 
 ## The Field Operation
 
-A six-member volunteer team left Dhaka at 10:00 PM and travelled overnight, arriving in Chattogram at 8:00 AM the following morning. After a brief period of preparation, the team loaded the supplies into a pickup truck at 9:30 AM and reached the affected communities at around 1:00 PM. Over the next 12 hours, the volunteers distributed relief packages to all 70 selected families.
+A six-member volunteer team left Dhaka at 10:00 PM and travelled overnight, arriving in Chattogram at 8:00 AM the following morning. After a brief period of preparation, the team loaded the supplies into a pickup truck at 9:30 AM and reached the affected communities at around 1:00 PM. For more than 12 hours, the volunteers distributed relief packages to all 70 selected families.
 
 Muddy roads made many homes inaccessible by vehicle. The volunteers divided into two teams of three and carried the 15-kilogram packages on foot, sometimes walking for more than 30 minutes to reach households. Despite the exhausting journey and difficult conditions, they continued until every selected family had received support.
 
@@ -68,8 +68,8 @@ Muddy roads made many homes inaccessible by vehicle. The volunteers divided into
 
 - **BDT 70,000 raised and allocated** as the total project budget.
 - **70 relief packages distributed** to 70 families.
-- **More than 280 people reached**, based on an average household size of four.
-- **BDT 929 in supplies per package**, with an additional BDT 4,970 spent on transportation.
+- **Approximately 280 people reached**, based on an average household size of four.
+- **BDT 929 estimated value per package**, with BDT 4,970 spent on transportation in total.
 - **Around two weeks of essential support** provided to each household.
 
 These results reflect the generosity of our donors and supporters, the work of our partners and the commitment of our volunteers. Just as importantly, the project reflected the trust placed in a youth-led organisation. It showed that young people can lead a careful and accountable humanitarian response when their community supports them.
